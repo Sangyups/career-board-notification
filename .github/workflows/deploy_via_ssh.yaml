@@ -1,0 +1,29 @@
+name: DEPLOY_TO_SERVER_VIA_SSH
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            touch .env
+            echo "DB_NAME=${{ secrets.DB_NAME }} >> .env
+            echo "DB_HOST=${{ secrets.DB_HOST }} >> .env
+            echo "DB_PORT=${{ secrets.DB_PORT }} >> .env
+            echo "DB_USER=${{ secrets.DB_USER }} >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
+            echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }} >> .env
+            mv ./.env $HOME/Projects/${{ github.event.repository.name }}
+            cd $HOME/Projects/${{ github.event.repository.name }}
+            git pull origin main
+            sh update_packages.sh
