@@ -3,6 +3,8 @@ import os
 from dotenv import load_dotenv
 from peewee import *
 
+from const import DATETIME_FORMAT
+
 load_dotenv()
 
 db = MySQLDatabase(
@@ -24,7 +26,7 @@ class Notice(BaseModel):
     title = CharField(max_length=100)
     manager = CharField(max_length=20)
     view_counts = IntegerField()
-    registered_at = DateTimeField(formats="%Y.%m.%d")
+    registered_at = DateTimeField(formats=DATETIME_FORMAT)
     link = TextField()
 
 
