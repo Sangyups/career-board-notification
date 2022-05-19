@@ -1,6 +1,6 @@
 from peewee import fn
 
-from models import Notice
+from notice.models import Notice
 
 
 def save_notices(updated_notices):

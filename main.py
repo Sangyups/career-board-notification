@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from const import DATETIME_FORMAT
-from services import save_notices, get_latest_id
+from notice.services import save_notices, get_latest_id
 from web_scraping import get_notices_from_career_board
 
 
