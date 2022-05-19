@@ -4,6 +4,7 @@ from peewee import fn
 
 from const import DATETIME_FORMAT
 from models import Notice
+from services import save_notices
 from web_scraping import get_notices_from_career_board
 
 
@@ -33,3 +34,4 @@ def get_updated_notices():
 
 if __name__ == "__main__":
     updated_notices = get_updated_notices()
+    save_notices(updated_notices)
