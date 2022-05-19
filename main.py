@@ -1,7 +1,11 @@
+from datetime import datetime
+
 import requests
 from bs4 import BeautifulSoup
+from peewee import fn
 
-from const import URL, URL_SUFFIX
+from const import URL, URL_SUFFIX, DATETIME_FORMAT
+from models import Notice
 
 
 def get_text_from_element(element):
@@ -27,5 +31,29 @@ def get_notices():
     return notice_list
 
 
+def get_updated_notices(notices):
+    query = Notice.select(fn.MAX(Notice.notice_id))
+    latest_id = query if query.scalar() else 0
+
+    updated_notices = []
+    for notice in notices:
+        notice_id, title, manager, view_counts, registered_at, link = (
+            int(notice[0]),
+            notice[1],
+            notice[2],
+            int(notice[3]),
+            datetime.strptime(notice[4], DATETIME_FORMAT).date(),
+            notice[5],
+        )
+        if notice_id <= latest_id:
+            break
+        updated_notices.append(
+            tuple([notice_id, title, manager, view_counts, registered_at, link])
+        )
+
+    return updated_notices
+
+
 if __name__ == "__main__":
-    print(get_notices())
+    notices = get_notices()
+    get_updated_notices(notices)
