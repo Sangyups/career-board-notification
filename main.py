@@ -2,7 +2,7 @@ from datetime import datetime
 
 from const import DATETIME_FORMAT
 from notice.services import get_latest_id, save_notices
-from notification import notify_via_slack
+from notification.slack import notify_via_slack
 from web_scraping import get_notices_from_career_board
 
 
