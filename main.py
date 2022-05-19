@@ -1,37 +1,14 @@
 from datetime import datetime
 
-import requests
-from bs4 import BeautifulSoup
 from peewee import fn
 
-from const import URL, URL_SUFFIX, DATETIME_FORMAT
+from const import DATETIME_FORMAT
 from models import Notice
+from web_scraping import get_notices_from_career_board
 
 
-def get_text_from_element(element):
-    return element.get_text().strip()
-
-
-def get_notices():
-    notice_list = []
-    response = requests.get(URL + URL_SUFFIX)
-    html = response.text
-    soup = BeautifulSoup(html, "html.parser")
-    table_body = soup.select_one(
-        "#jwxe_main_content > div > div > div > div.t_list.test20200330 > table > tbody"
-    )
-    rows = table_body.select("tr")
-    for table_row in rows:
-        cols = table_row.select("td")
-        new_cols = list(map(get_text_from_element, cols))
-        new_cols.append(URL + cols[1].select_one("a").attrs["href"])
-        notice_list.append(new_cols)
-        print(new_cols)
-
-    return notice_list
-
-
-def get_updated_notices(notices):
+def get_updated_notices():
+    notices = get_notices_from_career_board()
     query = Notice.select(fn.MAX(Notice.notice_id))
     latest_id = query if query.scalar() else 0
 
@@ -55,5 +32,4 @@ def get_updated_notices(notices):
 
 
 if __name__ == "__main__":
-    notices = get_notices()
-    get_updated_notices(notices)
+    updated_notices = get_updated_notices()
