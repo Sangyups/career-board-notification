@@ -1,18 +1,13 @@
 from datetime import datetime
 
-from peewee import fn
-
 from const import DATETIME_FORMAT
-from models import Notice
-from services import save_notices
+from services import save_notices, get_latest_id
 from web_scraping import get_notices_from_career_board
 
 
 def get_updated_notices():
     notices = get_notices_from_career_board()
-    query = Notice.select(fn.MAX(Notice.notice_id))
-    latest_id = query if query.scalar() else 0
-
+    latest_id = get_latest_id()
     updated_notices = []
     for notice in notices:
         notice_id, title, manager, view_counts, registered_at, link = (
