@@ -19,7 +19,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         with:
-          envs: DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, SLACK_WEBHOOK_URL
+          envs: DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, SLACK_WEBHOOK_URL, DISCORD_WEBHOOK_URL
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
