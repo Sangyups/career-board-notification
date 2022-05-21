@@ -17,6 +17,7 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         with:
           envs: DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, SLACK_WEBHOOK_URL
           host: ${{ secrets.HOST }}
@@ -30,6 +31,7 @@ jobs:
             export DB_USER=$DB_USER
             export DB_PASSWORD=$DB_PASSWORD
             export SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL
+            export DISCORD_WEBHOOK_URL=$DISCORD_WEBHOOK_URL
             cd $HOME/Projects/${{ github.event.repository.name }}
             git pull origin main
             sh ./scripts/create_dotenv.sh

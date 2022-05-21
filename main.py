@@ -2,7 +2,7 @@ from datetime import datetime
 
 from const import DATETIME_FORMAT
 from notice.services import get_latest_id, save_notices
-from notification.slack import notify_via_slack
+from notification.index import notify_notices
 from web_scrapper import get_notices_from_career_board
 
 
@@ -31,5 +31,5 @@ def get_updated_notices():
 if __name__ == "__main__":
     updated_notices = get_updated_notices()
     if updated_notices:
-        notify_via_slack(updated_notices)
+        notify_notices(updated_notices)
         save_notices(updated_notices)
