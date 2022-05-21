@@ -8,6 +8,6 @@ def save_notices(updated_notices):
 
 
 def get_latest_id():
-    query = Notice.select(fn.MAX(Notice.notice_id))
-    latest_id = query if query.scalar() else 0
+    query = Notice.select(fn.MAX(Notice.notice_id)).scalar()
+    latest_id = query if query else 0
     return latest_id
