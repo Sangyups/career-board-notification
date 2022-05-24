@@ -1,11 +1,22 @@
-import logging
+import logging.config
 
+config = {
+    "version": 1,
+    "formatters": {
+        "default": {
+            "format": "%(asctime)s [%(levelname)s]: %(filename)s:%(lineno)d - %(message)s"
+        }
+    },
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "./logs/main.log",
+            "formatter": "default",
+            "level": "INFO",
+        },
+    },
+    "root": {"handlers": ["file"], "level": "INFO"},
+}
+
+logging.config.dictConfig(config)
 logger = logging.getLogger()
-
-logger.setLevel(logging.INFO)
-
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-
-file_handler = logging.FileHandler("./logs/main.log")
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
