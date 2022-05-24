@@ -3,6 +3,7 @@ import json
 import requests
 
 from const import SLACK_WEBHOOK_URL
+from logger import logger
 
 
 def build_slack_message(lst):
@@ -39,3 +40,7 @@ def notify_via_slack(notices):
         data=json.dumps(payload),
         headers={"Content-Type": "application/json"},
     )
+    if response.status_code == 200:
+        logger.info("슬랙에 성공적으로 메시지를 전송하였습니다.")
+    else:
+        logger.error(f"{response.status_code} {response.text} 에러 발생")
