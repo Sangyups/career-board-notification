@@ -3,6 +3,7 @@ import json
 import requests
 
 from const import DISCORD_WEBHOOK_URL
+from logger import logger
 
 
 def build_discord_message(lst):
@@ -34,4 +35,7 @@ def notify_via_discord(notices):
     payload = build_discord_message(notices)
 
     response = requests.post(url, headers=headers, data=json.dumps(payload))
-    print(response.text)
+    if response.status_code == 200:
+        logger.info("디스코드에 성공적으로 메시지를 전송하였습니다.")
+    else:
+        logger.error(f"{response.status_code} {response.text} 에러 발생")
