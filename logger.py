@@ -1,4 +1,7 @@
 import logging.config
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 
 config = {
     "version": 1,
@@ -10,7 +13,7 @@ config = {
     "handlers": {
         "file": {
             "class": "logging.FileHandler",
-            "filename": "./logs/main.log",
+            "filename": BASE_DIR / "logs/main.log",
             "formatter": "default",
             "level": "INFO",
         },
