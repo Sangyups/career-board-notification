@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;NON_KEYWORDS=USER
+  h2:
+    console:
+      enabled: true
