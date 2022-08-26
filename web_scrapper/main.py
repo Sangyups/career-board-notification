@@ -13,13 +13,16 @@ def get_updated_notices():
     updated_notices = []
     for notice in notices:
         notice_id, title, manager, view_counts, registered_at, link = (
-            int(notice[0]),
+            notice[0],
             notice[1],
             notice[2],
             int(notice[3]),
             datetime.strptime(notice[4], DATETIME_FORMAT).date(),
             notice[5],
         )
+        if not notice_id:
+            continue
+        notice_id = int(notice_id)
         if notice_id <= latest_id:
             break
         updated_notices.append(
