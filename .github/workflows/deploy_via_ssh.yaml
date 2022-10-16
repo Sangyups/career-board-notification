@@ -2,7 +2,7 @@ name: DEPLOY_TO_SERVER_VIA_SSH
 
 on:
   push:
-    branches: [main]
+    branches: ['nothing']
 
 jobs:
   build:
