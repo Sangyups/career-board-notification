@@ -3,6 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
+
 config = {
     "version": 1,
     "formatters": {
@@ -17,8 +18,13 @@ config = {
             "formatter": "default",
             "level": "INFO",
         },
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "default",
+            "level": "INFO",
+        },
     },
-    "root": {"handlers": ["file"], "level": "INFO"},
+    "root": {"handlers": ["file", "console"], "level": "INFO"},
 }
 
 logging.config.dictConfig(config)
