@@ -34,6 +34,5 @@ jobs:
             export DISCORD_WEBHOOK_URL=$DISCORD_WEBHOOK_URL
             cd $HOME/Projects/${{ github.event.repository.name }}
             git pull origin main
-            cd web_scrapper
             sh ./scripts/create_dotenv.sh
             sh ./scripts/update_packages.sh
