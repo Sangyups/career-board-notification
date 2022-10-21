@@ -1,7 +1,7 @@
 from github import Github
 from github.Repository import Repository
 
-from const import GITHUB_TOKEN, GITHUB_REPOSITORY
+from const import MASTER_GITHUB_TOKEN, REPO_NAME
 from logger import logger
 from utils.time_utils import get_current_date
 
@@ -17,8 +17,8 @@ def build_issue_message(notices):
 
 def get_repo():
     try:
-        g = Github(GITHUB_TOKEN)
-        return g.get_repo(GITHUB_REPOSITORY)
+        g = Github(MASTER_GITHUB_TOKEN)
+        return g.get_user().get_repo(REPO_NAME)
     except Exception as e:
         logger.error(str(e))
 
