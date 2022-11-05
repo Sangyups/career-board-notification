@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from const import URL, URL_SUFFIX
+from const import URL, URL_QUERY
 from logger import logger
 
 
@@ -12,7 +12,7 @@ def get_text_from_element(element):
 def get_notices_from_career_board():
     notice_list = []
     try:
-        response = requests.get(URL + URL_SUFFIX)
+        response = requests.get(URL + URL_QUERY)
         html = response.text
         soup = BeautifulSoup(html, "html.parser")
         table_body = soup.select_one(
