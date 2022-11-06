@@ -2,7 +2,7 @@ from datetime import datetime
 
 from const import DATETIME_FORMAT
 from logger import logger
-from notice.services import get_latest_id, save_notices
+from notice.services import delete_old_notices, get_latest_id, save_notices
 from notification.index import notify_notices
 from web_scrapper import get_notices_from_career_board
 
@@ -38,3 +38,4 @@ if __name__ == "__main__":
     if updated_notices:
         notify_notices(updated_notices)
         save_notices(updated_notices)
+        delete_old_notices()
