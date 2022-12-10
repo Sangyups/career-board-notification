@@ -16,7 +16,7 @@ def delete_old_notices():
         Notice.registered_at < datetime.now() - timedelta(weeks=12)
     )
     num_deleted = to_delete.execute()
-    logger.info(f"{len(num_deleted)}개의 공지가 데이터베이스에서 삭제되었습니다.")
+    logger.info(f"{num_deleted}개의 공지가 데이터베이스에서 삭제되었습니다.")
 
 
 def get_latest_id():
