@@ -2,7 +2,7 @@
 
 ## 개요
 
-고려대학교 컴퓨터학과 진로정보게시판에서 채용 공고를 가져와서 새로 업데이트 된 공고를 알려줍니다.
+[고려대학교 컴퓨터학과 진로정보게시판](https://cs.korea.ac.kr/cs/board/course.do)에서 채용 공고를 가져와서 새로 업데이트 된 공고를 알려줍니다.
 
 ## 기능
 
@@ -16,4 +16,4 @@
 
 > ~~_oracle cloud의 free tier는 서버가 불안정할 때가 많고 oracle 대시보드 자체도 불편한 점이 많아 추후 github action의 cron job을 통해 배포할 예정입니다._~~
 
-github action으로 이전 완료하였습니다. github action의 schedule은 우선순위에 밀리기 때문에 정확히 13시가 아니라 그 이후에 실행될 수 있습니다.
+github action으로 이전 완료하였습니다. github action의 schedule은 우선순위에서 밀리기 때문에 정확히 13시가 아니라 그 이후에 실행될 수 있습니다.
